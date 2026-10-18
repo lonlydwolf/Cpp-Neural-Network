@@ -2,6 +2,7 @@
 #include <iostream>
 #include <time.h>
 #include <vector>
+#include <cstdlib>
 
 using namespace std;
 class Neuron;
@@ -26,13 +27,13 @@ public:
 private:
     static double traningRate;
     static double Momentum;
-    double Gradient;
+    double Gradient = 0.0;
     static double activationFunction(double sum);
     static double activationFunctionDerivative(double sum);
     double randomWeight() { return rand() / double(RAND_MAX); }
     double sumDOW(const Layer& nextLayer)const;
     unsigned Index;
-    double outputValue;
+    double outputValue = 0.0;
     vector<Connection> outputWeights;
     double bias;
 };

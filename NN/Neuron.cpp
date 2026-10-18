@@ -1,4 +1,5 @@
 #include "Neuron.h"
+#include <cmath>
 
 double Neuron::traningRate = 0.2;
 double Neuron::Momentum = 0.5;
@@ -8,7 +9,6 @@ Neuron::Neuron(unsigned numberOfOutputs, unsigned neuronIndex)
     {
         outputWeights.push_back(Connection());
         outputWeights.back().Weight = randomWeight();
-        cout << outputWeights.back().Weight << endl;
     }
     Index = neuronIndex;
     bias = 1.0;
@@ -25,7 +25,7 @@ void Neuron::feedForward(const Layer& previousLayer)
 }
 double Neuron::activationFunction(double sum)
 {
-    return tanh(sum);
+    return std::tanh(sum);
 }
 double Neuron::activationFunctionDerivative(double sum)
 {
