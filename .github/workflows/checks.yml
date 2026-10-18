@@ -1,0 +1,26 @@
+name: C++ reference checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build demo and tests
+        run: |
+          mkdir -p build
+          c++ -std=c++17 -Wall -Wextra -pedantic -I NN NN/Network.cpp NN/Neuron.cpp examples/xor_demo.cpp -o build/xor_demo
+          c++ -std=c++17 -Wall -Wextra -pedantic -I NN NN/Network.cpp NN/Neuron.cpp tests/network_tests.cpp -o build/network_tests
+      - name: Check error metric and convergence
+        run: ./build/network_tests
+      - name: Run seeded example
+        run: ./build/xor_demo --seed 0

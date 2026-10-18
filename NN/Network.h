@@ -16,11 +16,12 @@ public:
 	void feedForward(const vector<double>& inputValues);
 	void backPropagation(const vector<double>& targetValues);
 	void printResult(ofstream &data);
+	vector<double> getResults() const;
 	double getAvarageError()const { return averageError; }
 private:
 	vector<Layer> Layers;
-	double Error;
-	double averageError;
+	double Error = 0.0;
+	double averageError = 0.0;
 	static double numberToAverage;
 };
 
